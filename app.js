@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const md5=require("md5");
+const bcrypt=require("bcrypt");
 
 const app = express();
 
@@ -36,8 +37,7 @@ app.post("/register", function (req, res) {
     email: req.body.username,
     password: md5(req.body.password),
   });
-  newUser
-    .save()
+  newUser.save()
     .then(() => {
       res.render("secrets");
     })
